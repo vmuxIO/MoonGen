@@ -33,12 +33,12 @@ function master(args)
 	device.waitForLinks()
 	dev1:getTxQueue(0):setRate(args.rate)
 	dev2:getTxQueue(0):setRate(args.rate)
-	mg.startTask("loadSlave", dev1:getTxQueue(0))
+	-- mg.startTask("loadSlave", dev1:getTxQueue(0))
 	if dev1 ~= dev2 then
-		mg.startTask("loadSlave", dev2:getTxQueue(0))
+		-- mg.startTask("loadSlave", dev2:getTxQueue(0))
 	end
 	stats.startStatsTask{dev1, dev2}
-	mg.startSharedTask("timerSlave", dev1:getTxQueue(1), dev2:getRxQueue(1), args.file)
+	mg.startSharedTask("timerSlave", dev1:getTxQueue(0), dev2:getRxQueue(0), args.file)
 	mg.waitForTasks()
 end
 
