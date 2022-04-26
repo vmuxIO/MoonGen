@@ -15,7 +15,26 @@ add_subdirectory(libmoon)
 include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}/src
 	${CMAKE_CURRENT_SOURCE_DIR}/lib
-	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/x86_64-native-linux-gcc/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/x86_64-native-linux-gcc/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/eal/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/eal/linux/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/eal/x86/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/mbuf
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/ethdev
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/net
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/mempool
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/ring
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/meter
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/pci
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/security
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/kvargs
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/cryptodev
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/hash
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/rcu
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/config
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/build
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/drivers/bus/pci
+	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/lib/eal/include
 	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/luajit/src
 	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/highwayhash/highwayhash
 	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/tbb/include
@@ -40,7 +59,9 @@ set(libraries
 
 link_directories(
 	${CMAKE_CURRENT_BINARY_DIR}/libmoon
-	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/x86_64-native-linux-gcc/lib
+  #${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/x86_64-native-linux-gcc/lib
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/build/lib
+  ${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/dpdk/build/drivers
 	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/luajit/usr/local/lib
 	${CMAKE_CURRENT_SOURCE_DIR}/libmoon/deps/highwayhash/lib
 )
