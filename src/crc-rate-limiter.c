@@ -52,7 +52,7 @@ static struct rte_mbuf* get_delay_pkt_bad_crc(struct rte_mempool* pool, uint32_t
 	// account for preamble, sfd, and ifg (CRC is disabled)
 	pkt->data_len = delay - 20;
 	pkt->pkt_len = delay - 20;
-	pkt->ol_flags |= PKT_TX_NO_CRC_CSUM;
+  // TODO apply pauls dpdk patch and reenable: pkt->ol_flags |= PKT_TX_NO_CRC_CSUM;
 	current += delay;
 	return pkt;
 }
