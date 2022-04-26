@@ -40,6 +40,15 @@ namespace rate_limiter {
 		};
 	};
 	static_assert(sizeof(limiter_control) == 16, "struct size mismatch");
+
+typedef uint64_t tsc_t;
+static int tsc_dynfield_offset = -1;
+
+static inline tsc_t *
+tsc_field(struct rte_mbuf *mbuf)
+{
+       return RTE_MBUF_DYNFIELD(mbuf, tsc_dynfield_offset, tsc_t *);
+}
 	
 	/*
 	 * Arbitrary time software rate control main
@@ -62,7 +71,8 @@ namespace rate_limiter {
 			if (n) {
 				for (int i = 0; i < cur_batch_size; i++) {
 					// desired inter-frame spacing is encoded in the udata field (bytes on the wire)
-					id_cycles = ((uint64_t) bufs[i]->udata64 * 8 / link_bps) * tsc_hz;
+					//id_cycles = ((uint64_t) bufs[i]->udata64 * 8 / link_bps) * tsc_hz;
+					id_cycles = ((uint64_t) *tsc_field(bufs[i]) * 8 / link_bps) * tsc_hz;
 					next_send += id_cycles;
 					while ((cur = rte_get_tsc_cycles()) < next_send);
 					while (rte_eth_tx_burst(device, queue, bufs + i, 1) == 0) {
